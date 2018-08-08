@@ -2,6 +2,7 @@ import re
 import requests
 import csv
 import os
+import time
 
 
 
@@ -21,7 +22,6 @@ class MaoYan():
 
     #"思路：先创建文件，然后返回文件操作对象， 或者创建全局操作对象"
     def file_cre(self):
-        
         self.file = open('my.csv','a', newline='')
         self.writer = csv.DictWriter(self.file, fieldnames=self.fieldnames)
         self.writer.writeheader()
@@ -55,7 +55,7 @@ class MaoYan():
                     'score':item[4]+item[5],
                 }
                 print(info)
-                self.save_to_csv(info)
+                #self.save_to_csv(info)
 
                 
 
@@ -73,12 +73,15 @@ class MaoYan():
 
 
     def main(self):
-        self.file_del()      #首先进行文件删除
-        self.file_cre()      #创建文件
+        #self.file_del()      #首先进行文件删除
+        #self.file_cre()      #创建文件
         self.html_parse()    #解析并存储
-        self.file_close()    #关闭文件
+        #self.file_close()    #关闭文件
            
 
 if __name__ == "__main__":
+    s_time = time.time()
     app = MaoYan()
     app.main()
+    e_time = time.time()
+    print("总耗时:", e_time-s_time)
